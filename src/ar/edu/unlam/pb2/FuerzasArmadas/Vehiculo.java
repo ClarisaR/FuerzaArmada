@@ -2,7 +2,7 @@ package ar.edu.unlam.pb2.FuerzasArmadas;
 
 import java.util.Objects;
 
-public abstract class Vehiculo implements Comparable<Vehiculo> {
+public abstract class Vehiculo{
 	protected String tipo;
 	protected Integer codigo;
 
@@ -17,14 +17,11 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 	}
 
 	@Override
-	public int compareTo(Vehiculo vehiculo) {
-		int resultadoComparacion = this.codigo.compareTo(vehiculo.getCodigo());
-		return resultadoComparacion;
-	}
-
-	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
 	}
 
 	@Override
@@ -33,11 +30,18 @@ public abstract class Vehiculo implements Comparable<Vehiculo> {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
 		Vehiculo other = (Vehiculo) obj;
-		return Objects.equals(codigo, other.codigo);
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
+	
+	
+
+
 	
 	
 }
